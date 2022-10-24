@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
 use Illuminate\Http\Request;
+use App\Models\Produto;
 
 class ControladorProduto extends Controller
 {
@@ -13,7 +15,10 @@ class ControladorProduto extends Controller
      */
     public function index()
     {
-        return view ('produtos');
+        $pros = Produto::all();
+        return view ('produtos', compact('pros'));
+        $cat = Categoria::all();
+        return view ('categorias', compact('cat'));
     }
 
     /**
@@ -23,7 +28,7 @@ class ControladorProduto extends Controller
      */
     public function create()
     {
-        //
+        return view ('novoproduto');
     }
 
     /**
@@ -34,7 +39,15 @@ class ControladorProduto extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $pro = new Produto();
+        $pro = Produto::all();
+        $pro->nome = $request->input('nomeProduto');
+        $pro->estoque = $request->input('estoque');
+        $pro->preco = $request->input('preco');
+        $pro->save();
+        return redirect('/produtos');
+
+        
     }
 
     /**
@@ -56,7 +69,11 @@ class ControladorProduto extends Controller
      */
     public function edit($id)
     {
-        //
+      $pro = Produto::find($id);
+        if(isset($cat)) {
+            return view ('editarprodutos', compact('pro'));
+         }
+        return redirect('/produtos');
     }
 
     /**
@@ -67,8 +84,20 @@ class ControladorProduto extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
+    
     {
-        //
+        $pro = Produto::find($id);
+        if(isset($pro)) {
+            $pro->nome = $request->input('nomeProduto');
+            $pro->estoque = $request->input('estoque');
+            $pro->preco = $request->input('preco');
+
+            $pro = Produto::find($id);
+
+
+            $pro->save();
+        }
+        return redirect('/produtos');
     }
 
     /**
@@ -79,6 +108,11 @@ class ControladorProduto extends Controller
      */
     public function destroy($id)
     {
-        //
-    }
+        $pro = Produto::find($id);
+        if (isset($cat)){
+            $pro->delete();
+        }
+        return redirect('/produtos');
+
+ }
 }

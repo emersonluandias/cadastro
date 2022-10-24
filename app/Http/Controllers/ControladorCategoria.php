@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Models\Categoria;
 
 
@@ -43,7 +42,7 @@ class ControladorCategoria extends Controller
         $cat->save();
         return redirect('/categorias');
     }
-
+    
     /**
      * Display the specified resource.
      *
@@ -63,7 +62,11 @@ class ControladorCategoria extends Controller
      */
     public function edit($id)
     {
-        //$cats = Categoria::all();
+        $cat = Categoria::find($id);
+        if(isset($cat)) {
+            return view ('editarcategoria', compact('cat'));
+         }
+        return redirect('/categorias');
     }
 
     /**
@@ -75,7 +78,12 @@ class ControladorCategoria extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $cat = Categoria::find($id);
+        if(isset($cat)) {
+            $cat->nome = $request->input('nomeCategoria');
+            $cat->save();
+        }
+        return redirect('/categorias');
     }
 
     /**
