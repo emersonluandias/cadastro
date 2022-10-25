@@ -20,16 +20,14 @@
                        id="preco" placeholder="Preco">
 
             </div>
-            <select class="custom-select mr-sm-2" name="categoria_id" option value="categoria_id"> id="categoria_id"
-                <option selected>Escolha a Categoria...</option>
-            
-               
-                  
-                <option value="1">"{{'nomeCategoria'}}"</option>
-                <option value="2">"{{'nomeCategoria'}}"</option>
-                <option value="3">"{{'nomeCategoria'}}"</option>
-              
+            <select class="custom-select mr-sm-2" name="nomeCategoria" option value="categoria_id">
+            <option selected>Escolha a Categoria...</option>
+            @foreach($cat as $cats)
 
+            <option value="1">{{$cats->id}}</option>
+            
+             
+            @endforeach
             </select>
                 <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
                 <button type="cancel" class="btn btn-danger btn-sm">Cancel</button>

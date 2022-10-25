@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Categoria;
 use Illuminate\Http\Request;
 use App\Models\Produto;
+use Illuminate\Support\Facades\Auth;
 
 class ControladorProduto extends Controller
 {
@@ -28,7 +29,10 @@ class ControladorProduto extends Controller
      */
     public function create()
     {
-        return view ('novoproduto');
+        $cat = Categoria::all();
+        
+        return view ('novoproduto', compact('cat'));
+        
     }
 
     /**
@@ -37,13 +41,13 @@ class ControladorProduto extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request ,)
     {
         $pro = new Produto();
-        $pro = Produto::all();
         $pro->nome = $request->input('nomeProduto');
         $pro->estoque = $request->input('estoque');
         $pro->preco = $request->input('preco');
+        $pro->categoria_id = $request->input('categoria_id',('15'));
         $pro->save();
         return redirect('/produtos');
 
@@ -91,10 +95,7 @@ class ControladorProduto extends Controller
             $pro->nome = $request->input('nomeProduto');
             $pro->estoque = $request->input('estoque');
             $pro->preco = $request->input('preco');
-
             $pro = Produto::find($id);
-
-
             $pro->save();
         }
         return redirect('/produtos');

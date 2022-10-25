@@ -28,6 +28,6 @@ Route::post('/categorias/{id}','App\Http\Controllers\ControladorCategoria@update
 Route::get('/categorias/apagar/{id}','App\Http\Controllers\ControladorCategoria@destroy');
 Route::get('/produtos/novo','App\Http\Controllers\ControladorProduto@create');
 Route::post('/produtos','App\Http\Controllers\ControladorProduto@store');
-Route::get('/produtos/editar/{id}','App\Http\Controllers\ControladorProduto@edit');
+Route::get('/produtos/editar/{id}','App\Http\Controllers\ControladorProduto@edit')->where('id', '[0-9]+');
 Route::post('/produtos/{id}','App\Http\Controllers\ControladorProduto@update');
 Route::get('/produtos/apagar/{id}','App\Http\Controllers\ControladorProduto@destroy');
