@@ -29,9 +29,9 @@ class ControladorProduto extends Controller
      */
     public function create()
     {
-        $cat = Categoria::all();
         
-        return view ('novoproduto', compact('cat'));
+        $cat = Categoria::all();
+        return view ('novoproduto',compact('cat'));
         
     }
 
@@ -47,7 +47,7 @@ class ControladorProduto extends Controller
         $pro->nome = $request->input('nomeProduto');
         $pro->estoque = $request->input('estoque');
         $pro->preco = $request->input('preco');
-        $pro->categoria_id = $request->input('categoria_id',('15'));
+        $pro->categoria_id = $request->input('categoria_id',('15'));       
         $pro->save();
         return redirect('/produtos');
 
@@ -74,7 +74,7 @@ class ControladorProduto extends Controller
     public function edit($id)
     {
       $pro = Produto::find($id);
-        if(isset($cat)) {
+        if(isset($pro)) {
             return view ('editarprodutos', compact('pro'));
          }
         return redirect('/produtos');
@@ -91,15 +91,12 @@ class ControladorProduto extends Controller
     
     {
         $pro = Produto::find($id);
-        if(isset($pro)) {
+          if(isset($pro)) {
             $pro->nome = $request->input('nomeProduto');
-            $pro->estoque = $request->input('estoque');
-            $pro->preco = $request->input('preco');
-            $pro = Produto::find($id);
             $pro->save();
-        }
-        return redirect('/produtos');
-    }
+           }
+          return redirect('/produtos');
+      }
 
     /**
      * Remove the specified resource from storage.
@@ -110,7 +107,7 @@ class ControladorProduto extends Controller
     public function destroy($id)
     {
         $pro = Produto::find($id);
-        if (isset($cat)){
+        if (isset($pro)){
             $pro->delete();
         }
         return redirect('/produtos');

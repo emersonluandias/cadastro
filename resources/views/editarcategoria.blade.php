@@ -7,7 +7,7 @@
         <form action="/categorias/{{$cat->id}}" method="POST">
             @csrf
             <div class="form-group">
-                <label for="nomeCategoria">Nome da Categoria</label>
+                <label form="nomeCategoria">Nome da Categoria</label>
                 <input type="text" class="form-control" name="nomeCategoria" value="{{$cat->nome}}"
                        id="nomeCategoria" placeholder="Categoria">
             </div>
