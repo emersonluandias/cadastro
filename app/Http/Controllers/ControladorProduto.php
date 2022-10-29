@@ -78,6 +78,7 @@ class ControladorProduto extends Controller
       $pro = Produto::find($id);
         if(isset($pro)) {
         
+           
             return view ('editarprodutos', compact('pro','cat'));
          }
         return redirect('/produtos');
@@ -100,6 +101,7 @@ class ControladorProduto extends Controller
             $pro->preco = $request->input('preco');
             $pro->categoria_id = $request->input('nomeCategoria');
             $pro->categoria_nome = $request->input('nomecat');
+            
             $pro->save();
            }
           return redirect('/produtos');
