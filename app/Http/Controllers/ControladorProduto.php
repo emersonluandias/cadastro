@@ -47,7 +47,8 @@ class ControladorProduto extends Controller
         $pro->nome = $request->input('nomeProduto');
         $pro->estoque = $request->input('estoque');
         $pro->preco = $request->input('preco');
-        $pro->categoria_id = $request->input('categoria_id',('15'));       
+        $pro->categoria_id = $request->input('nomeCategoria'); 
+        $pro->categoria_nome = $request->input('nomecat');        
         $pro->save();
         return redirect('/produtos');
 
@@ -73,9 +74,11 @@ class ControladorProduto extends Controller
      */
     public function edit($id)
     {
+      $cat = Categoria::all();
       $pro = Produto::find($id);
         if(isset($pro)) {
-            return view ('editarprodutos', compact('pro'));
+        
+            return view ('editarprodutos', compact('pro','cat'));
          }
         return redirect('/produtos');
     }
@@ -93,6 +96,10 @@ class ControladorProduto extends Controller
         $pro = Produto::find($id);
           if(isset($pro)) {
             $pro->nome = $request->input('nomeProduto');
+            $pro->estoque = $request->input('estoque');
+            $pro->preco = $request->input('preco');
+            $pro->categoria_id = $request->input('nomeCategoria');
+            $pro->categoria_nome = $request->input('nomecat');
             $pro->save();
            }
           return redirect('/produtos');

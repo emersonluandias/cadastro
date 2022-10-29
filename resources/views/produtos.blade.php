@@ -13,6 +13,7 @@
                     <th>Nome do Produto</th>
                     <th>Preco</th>
                     <th>Estoque</th>
+                    <th>Codigo Categoria</th>
                     <th>Categoria</th>
                     <th>Acoes</th>
                 </tr>
@@ -28,6 +29,7 @@
             <td>{{$prod->preco}}</td>
             <td>{{$prod->estoque}}</td>
             <td>{{$prod->categoria_id}}</td>
+            <td>{{$prod->categoria_nome}}</td>
            
             <td>
                 <a href="/produtos/editar/{{$prod->id}}" class="btn btn-sm btn-primary">Editar</a>

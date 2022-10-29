@@ -64,6 +64,8 @@ class ControladorCategoria extends Controller
     {
         $cat = Categoria::find($id);
         if(isset($cat)) {
+
+           
             return view ('editarcategoria', compact('cat'));
          }
         return redirect('/categorias');
