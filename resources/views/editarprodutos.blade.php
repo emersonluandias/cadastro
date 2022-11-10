@@ -23,21 +23,13 @@
             @foreach($cat as $cats)
             <option value="{{$cats->id}}"{{ $cats->id == $pro->categoria_id ? 'selected' : '' }}>{{$cats->id}}</option>
             @endforeach
-                </select>
-                
+                </select>               
                 <select class="custom-select mr-sm-2" name="nomecat"  id="categoria_nome"  placeholder="Categoria">
-                 <option selected>Escolha nome da Categoria...</option>
-            @foreach($cat as $cats)
-            
-            <option value="{{$cats->nome}}" {{($cats->nome == $pro->categoria_nome) ? 'selected' : ''}}> {{$cats->nome}}</option>
-                
-             
+                    <option selected>Escolha nome da Categoria...</option>
+            @foreach($cat as $cats)            
+                    <option value="{{$cats->nome}}" {{($cats->nome == $pro->categoria_nome) ? 'selected' : ''}}> {{$cats->nome}}</option>          
             @endforeach
-
-            </select>  
-               
-
-
+                </select>                 
                     <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
                     <button type="cancel" class="btn btn-danger btn-sm">Cancel</button>
         </form>
