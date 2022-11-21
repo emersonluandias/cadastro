@@ -1,5 +1,4 @@
 @extends('layout.app', ["current" => "produtos" ])
-
 @section('body')
 
 <div class="card border">
@@ -13,7 +12,6 @@
                     <th>Nome</th>
                     <th>Quantidade</th>
                     <th>Preço</th>
-                    <th>Cod codigo</th>
                     <th>Departamento</th>
                     <th>Ações</th>
                 </tr>
@@ -40,7 +38,7 @@
 
                     <input type="hidden" id="id" class="form-control">
                     <div class="form-group">
-                        <label for="nomeProduto" class="control-label">Nome do Produto</label>
+                        <label for="nome" class="control-label">Nome do Produto</label>
                         <div class="input-group">
                             <input type="text" class="form-control" id="nomeProduto" placeholder="Nome do produto">
                         </div>
@@ -49,32 +47,24 @@
                     <div class="form-group">
                         <label for="precoProduto" class="control-label">Preço</label>
                         <div class="input-group">
-                            <input type="number" class="form-control" id="precoProduto" placeholder="Preço do produto">
+                            <input type="number" class="form-control" id="preco" placeholder="Preço do produto">
                         </div>
                     </div>
                     
                     <div class="form-group">
                         <label for="quantidadeProduto" class="control-label">Quantidade</label>
                         <div class="input-group">
-                            <input type="number" class="form-control" id="quantidadeProduto" placeholder="Quantidade do produto">
+                            <input type="number" class="form-control" id="estoque" placeholder="Quantidade do produto">
                         </div>
                     </div>                    
 
                     <div class="form-group">
-                        <label for="nomeCategoria" class="control-label">Categoria</label>
+                        <label for="categoria_nome" class="control-label">Categoria</label>
                         <div class="input-group">
-                            <select class="form-control" id="nomeCategoria" >
+                            <select class="form-control" id="categoria_nome" >
                             </select>    
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="categoria_id" class="control-label">Cod Categoria</label>
-                        <div class="input-group">
-                            <select class="form-control" id="categoria_id" >
-                            </select>    
-                        </div>
-                    </div>
-
 
                 </div>
                 <div class="modal-footer">
@@ -87,11 +77,43 @@
 </div>
 
 @endsection
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript"></script>
 @section('javascript')
 <script type="text/javascript">
-      function novoProduto() {
+
+    function novoProduto() {
+        $('#id').val('');
+        $('#nome').val('');
+        $('#preco').val('');
+        $('#estoque').val('');
         $('#dlgProdutos').modal('show');
     }
+
+    function carregarCategorias() {
+        $.getJSON('/api/categorias', function(data) { 
+            for(i=0;i<data.length;i++) {
+                opcao = '<option value ="' + data[i].id + '">' + 
+                    data[i].nome + '</option>';
+                $('#categoria_nome').append(opcao);
+            }
+        });
+    }
+
+    function carregarProdutos() {
+        $.getJSON('/api/produtos', function(produtos) { 
+            for(i=0;i<produtos.length;i++) {
+                linha = montarLinha(produtos[i]);
+                $('#tabelaProdutos>tbody').append(linha);
+            }
+        });        
+    }
+
+
+    $(function(){
+        carregarCategorias();
+        carregarProdutos();
+    })
+    
 </script>
 @endsection
+

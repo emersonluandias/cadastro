@@ -20,8 +20,6 @@ return new class extends Migration
             $table->float('preco');
             $table->integer('categoria_id')->unsigned();
             $table->foreign('categoria_id')->references('id')->on('categorias');
-            $table->foreign('categoria_nome');
-            $table->foreign('categoria_nome')->references('nome')->on('categorias');
             $table->timestamps();
         });
     }

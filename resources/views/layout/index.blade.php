@@ -23,5 +23,9 @@
                 <a href="/categorias" class="btn btn-primary">Cadastre seus Categorias</a>
             </div>
         </div>
+        <script src="{{ asset('js/app.js')}}" type="text/javascript"></script>
+        @hasSection('javascript')
+            @yield('javascript')
+        @endif
 
 @endsection
